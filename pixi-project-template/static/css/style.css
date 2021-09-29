@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, .main, #game {
+    width: 100%;
+    height: 100%;
+}
+
+#game {
+    position: relative;
+    z-index: 1;
+    /*background-color: #24116d;*/
+    overflow: hidden;
+}
+
+#pixi_player {
+    position: absolute;
+    z-index: 3;
+}
+
+#pixi_player canvas{
+    display:block;
+    width:100%;
+}
+
+#not_support{
+    display:none;
+}
