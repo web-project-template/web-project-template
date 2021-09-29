@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>学习中心V联盟</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+<div class="main">
+    <div id="game">
+        <div id="load_bg" class="bg"></div>
+        <div id="start_bg" class="bg active"></div>
+        <div id="main_bg" class="bg"></div>
+        <div id="mask_player"></div>
+        <div id="phaser_player"></div>
+        <div id="back_btn"></div>
+    </div>
+    <div id="not_support">
+        <div class="dialog-container">
+            <div class="dialog-bg">
+                <img src="./static/assets/public/dialog-dino-sweet.png">
+                <div class="dialog-title"></div>
+                <div class="white-board">
+                    <div class="dialog-content">
+                        <p id="content" class="content">该功能暂不支持您电脑的操作系统，敬请谅解！</p>
+                    </div>
+                    <div id='backlib' class="dialog-btn">返回</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  (function (w, d) {
+    if ((/dev=1/.test(w.location) || w.localStorage.getItem('dev'))) {
+      var s = d.createElement('script');
+      s.src = './static/lib/vconsole.min.js';
+      s.setAttribute('charset', 'UTF-8');
+      d.head.appendChild(s);
+      s.onload = function () {
+        new VConsole();
+      }
+    }
+
+    if ((/fps=1/.test(w.location) || w.localStorage.getItem('fps'))) {
+      var s = d.createElement('script');
+      s.src = './static/lib/stats.min.js';
+      s.setAttribute('charset', 'UTF-8');
+      d.head.appendChild(s);
+      s.onload = function () {
+        var stats = new Stats();
+        document.body.appendChild(stats.domElement);
+        stats.domElement.style.position = 'absolute'
+        stats.domElement.style.top = '0'
+        stats.domElement.style.right = '0'
+        stats.domElement.style.zIndex = '99'
+
+        function animate() {
+          requestAnimationFrame(animate);
+
+          if (stats) stats.update();
+        };
+        animate();
+      }
+    }
+  }(window, document))
+</script>
+<script src="./static/lib/phaser/phaser-3.19.0.min.js"></script>
+<script src="./static/lib/puremvc/puremvc-1.0.1.min.js"></script>
+<script src="./static/lib/TweenMax.min.js"></script>
+</body>
+</html>
