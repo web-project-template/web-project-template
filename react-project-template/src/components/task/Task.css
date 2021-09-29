@@ -1,0 +1,8 @@
+.task-body{
+    padding:8px;
+}
+
+.list-group-item >div span{
+    /*border:1px solid red;*/
+    padding:0 5px;
+}

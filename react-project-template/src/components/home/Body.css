@@ -1,0 +1,46 @@
+.home-body {
+    padding: 10px;
+    color: white;
+}
+
+.cotainer {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.cotainer:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+div.item:nth-child(odd) {
+    clear: both;
+}
+
+div.item:nth-child(odd) .item-inner {
+    padding-right: 5px;
+}
+
+div.item:nth-child(even) .item-inner {
+    padding-left: 5px;
+}
+
+.item {
+    position: relative;
+    width: 50%;
+    height: auto;
+    float: left;
+    text-align: center;
+    color: black;
+}
+
+.item img {
+    width: 100%;
+}
+
+.more-btn {
+    color: red;
+    text-align: center;
+}
