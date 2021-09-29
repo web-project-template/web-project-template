@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+  <title>vue-project</title>
+  <script>
+    function setRemFontSize(baseSize, baseWidth) {
+      //基本字体大小
+      var baseSize = baseSize || 100;
+      //设计图的基本宽度640
+      var baseWidth = baseWidth || 720;
+      var clientWidth = document.documentElement.clientWidth;
+      if (document.documentElement.clientWidth >= 768) {
+        clientWidth = 768;
+      } else if (document.documentElement.clientWidth <= 320) {
+        clientWidth = 320;
+      }
+      document.getElementsByTagName('html')[0].style.fontSize = clientWidth * baseSize / baseWidth + 'px'
+    }
+
+    setRemFontSize();
+    window.addEventListener("resize", function () {
+      setTimeout(function () {setRemFontSize();}, 200)
+    });
+  </script>
+</head>
+<body>
+<div id="app"></div>
+ <!--<script src="//ycimg.m.duoku.com/cimages/img/promo/gametemplate/common/js/vconsole.min.js"></script>-->
+ <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
+</body>
+</html>

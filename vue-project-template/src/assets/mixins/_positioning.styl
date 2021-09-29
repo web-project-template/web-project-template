@@ -1,0 +1,17 @@
+pos($position,$z=null)
+  position: $position;
+
+  if $z != null
+    z-index: $z;
+
+loc()
+  for prop,i in arguments
+    if prop != null
+      if i == 0
+        top:prop
+      else if i == 1
+        right:prop
+      else if i == 2
+        bottom:prop
+      else if i == 3
+        left:prop
