@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {combineReducers, createStore, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {createLogger} from 'redux-logger';
@@ -5,7 +6,10 @@ import * as reducers from './reducers';
 import {CHANGE_INFO, CHANGE_TAB, decrement, increment} from "./actions";
 import {fetchPosts} from "./actions/globalActionCreators";
 
-const loggerMiddleware = createLogger()
+const loggerMiddleware = createLogger({
+  timestamp:false,
+  duration:false
+})
 
 // combineReducers() 所做的只是生成一个函数，这个函数来调用你的一系列 reducer，每个 reducer 根据它们的 key 来筛选出 state 中的一部分数据并处理，然后这个生成的函数再将所有 reducer 的结果合并成一个大的对象。
 // combineReducers 接收一个对象，可以把所有顶级的 reducer 放到一个独立的文件中，通过 export 暴露出每个 reducer 函数，然后使用 import * as reducers 得到一个以它们名字作为 key 的 object：
@@ -22,7 +26,7 @@ export let store = createStore(
   reducer,
   applyMiddleware(
     thunkMiddleware, // 允许我们dispatch()函数
-    loggerMiddleware // 一个很便捷的middleware，用来打印action日志
+    // loggerMiddleware // 一个很便捷的middleware，用来打印action日志
   )
 );
 

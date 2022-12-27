@@ -1,34 +1,19 @@
-import './Body.css';
-import React, {Component} from 'react';
-import Pobsub from 'pubsub-js';
-import {getChengXiao, /*getOuYangNaNa*/} from "../../api";
+/* eslint-disable */
+import './Body.css'
+import React, {Component} from 'react'
+import Pobsub from 'pubsub-js'
+import {getChengXiao, /*getOuYangNaNa*/} from "../../api"
 
 export default class Body extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      showList: [
-        {
-          "title": "程潇1",
-          "url": "./cx01.jpg"
-        },
-        {
-          "title": "程潇2",
-          "url": "./cx02.jpg"
-        },
-        {
-          "title": "程潇3",
-          "url": "./cx03.jpg"
-        },
-        {
-          "title": "程潇4",
-          "url": "./cx04.jpg"
-        }
-      ]
-    };
-    this.imgs = []
+      loading: false,
+      columnMaxHeight: 0,
+      showList: []
+    }
 
     Pobsub.subscribe("CLICK_VIEW", (type, data) => {
       console.log("收到兄弟节点传来的数据：", data)
@@ -39,133 +24,138 @@ export default class Body extends Component {
     })
 
     Pobsub.subscribe("CLICK_CX", (type, data) => {
-      this.restCXList();
+      this.setState({showList: []})
     })
 
     Pobsub.subscribe("CLICK_OYNN", (type, data) => {
-      this.restOYNNList();
+      this.setState({showList: []})
     })
-  }
-
-  restCXList() {
-    this.setState({
-      showList: [
-        {
-          "title": "程潇1",
-          "url": "./cx01.jpg"
-        },
-        {
-          "title": "程潇2",
-          "url": "./cx02.jpg"
-        },
-        {
-          "title": "程潇3",
-          "url": "./cx03.jpg"
-        },
-        {
-          "title": "程潇4",
-          "url": "./cx04.jpg"
-        }
-      ]
-    })
-    this.lazyLoadImg();
-  }
-
-  restOYNNList() {
-    this.setState({
-      showList: [
-        {
-          "title": "欧阳娜娜",
-          "url": "./oynn01.jpg"
-        },
-        {
-          "title": "欧阳娜娜",
-          "url": "./oynn02.jpg"
-        },
-        {
-          "title": "欧阳娜娜",
-          "url": "./oynn03.jpg"
-        },
-        {
-          "title": "欧阳娜娜",
-          "url": "./oynn04.jpg"
-        }
-      ]
-    })
-    this.lazyLoadImg();
   }
 
   onClickMoreBtn() {
+    if (this.state.loading) return
+
+    this.setState({loading: true})
     getChengXiao().then(res => {
-      this.setState({
-        showList: this.state.showList.concat(res)
+      this.setState({loading: false})
+      this.load(res.map(item => item))
+    })
+  }
+
+  loadMore() {
+
+  }
+
+  async load(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      let url = arr[i]
+      let image = await asyncLoadImage(url).catch(err => {
+        console.log('err 加载图片错误：', url, err)
       })
-      this.imgs = [].concat(...document.querySelectorAll('.home-body img'))
-      // console.log("this.state.showList:", this.state.showList)
-    })
-  }
 
-  componentDidMount() {
-    // console.log("componentDidMount");
-    function throuttle(fn, interval) {
-      let lastTime = new Date().valueOf()
-      return function () {
-        let now = new Date().valueOf()
+      if (!image) return
 
-        if (now - lastTime > interval) {
-          lastTime = now
-          fn()
-        }
+      let finalHeight = (this.columnWidth) / (image.width / image.height) + this.columnGap
+      // console.log(image.width, image.height, finalHeight)
+
+      let min = Math.min(...this.columnHeightArr)
+      let minIndex = this.columnHeightArr.indexOf(min)
+
+      let item = {
+        url,
+        image,
+        top: min,
+        left: minIndex * (this.columnWidth + this.columnGap),
       }
+
+      this.columnHeightArr[minIndex] = min + finalHeight
+
+      this.setState({
+        columnMaxHeight: Math.max(...this.columnHeightArr),
+        showList: this.state.showList.concat(item)
+      })
     }
-
-    this.imgs = [].concat(...document.querySelectorAll('.home-body img'))
-    this.lazyLoadImg();
-
-    window.addEventListener('scroll', throuttle(this.onScrollListener.bind(this), 100), false);
   }
 
-  onScrollListener() {
-    this.lazyLoadImg();
+  async componentDidMount() {
+    // console.log("componentDidMount");
+
+    let {columnCount, columnWidth, columnGap} = calculate()
+
+    this.columnGap = columnGap
+    this.columnCount = columnCount
+    this.columnWidth = columnWidth
+    this.columnHeightArr = Array.apply(null, {length: this.columnCount}).map(() => 0)
+
+    this.onClickMoreBtn()
   }
 
-  lazyLoadImg() {
-    let windowHeight = window.innerHeight
-    if (this.imgs.length <= 0) return;
-    this.imgs.forEach((item, idx) => {
-      let sourceSrc = item.getAttribute('data-src')
-      if (sourceSrc) {
-        let currentSrc = item.getAttribute('src')
-        let rect = item.getBoundingClientRect()
-        if (rect.top < windowHeight && currentSrc !== sourceSrc) {
-          // console.log('加载图片:', item)
-          item.setAttribute('src', sourceSrc)
-        }
-      }
-    })
+  componentWillUnmount() {
+    console.log("Body.js 卸载")
   }
 
   render() {
     return (
       <div className="home-body">
-        <div className="cotainer">
+        <div className="list" style={{height: this.state.columnMaxHeight + 'px'}}>
           {
-            this.state.showList.map((val, idx) => {
-              return (<div className="item" key={idx}>
-                <div className="item-inner">
-                  <div className="item-img">
-                    <img src='./default.gif' data-src={val.url} alt=""/>
-                  </div>
-                  <div className="item-desc">
-                    <p>{val.title}</p>
-                  </div>
+            this.state.showList.map((item, idx) => {
+              return (<div className="list-item" style={{
+                width: this.columnWidth + "px",
+                left: item.left + 'px',
+                top: item.top + 'px'
+              }} key={idx}>
+                <div>
+                  <img src={(item.url) || './default.gif'}/>
+                  {/*<p>xxx</p>*/}
                 </div>
+                {/*<div className="list-item-inner">
+                  <div className="list-item-img">
+
+                    <img src='./default.gif' data-src={item.url} alt=""/>
+                  </div>
+                  <div className="list-item-desc">
+                    <p>{item.title}</p>
+                  </div>
+                </div>*/}
               </div>)
             })
           }
         </div>
-        <div className={'more-btn'} onClick={this.onClickMoreBtn.bind(this)}>加载更多...</div>
+        <div className={'more-btn'} onClick={this.onClickMoreBtn.bind(this)}>{this.state.loading ? '加载中...' : '加载更多...'}</div>
       </div>
     )
+  }
+}
+
+function asyncLoadImage(url) {
+  return new Promise((resolve, reject) => {
+    let img = new Image()
+    img.src = url
+    img.onload = () => {
+      resolve(img)
+    }
+    img.onerror = (err) => {
+      // console.log(err)
+      reject(err)
+    }
+  })
+}
+
+function calculate() {
+  let columnCount = 2
+  let columnGap = 5
+  let columnWidth = (window.innerWidth - 10 - columnGap) / 2
+
+  columnCount = columnCount > 4
+    ? 4
+    : columnCount < 1
+      ? 1
+      : columnCount
+
+  return {
+    columnCount,
+    columnGap,
+    columnWidth
   }
 }

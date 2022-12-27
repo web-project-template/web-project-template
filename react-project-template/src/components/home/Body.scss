@@ -1,21 +1,25 @@
 .home-body {
   padding: 5px;
-  color: white; }
+  color: white;
+}
 
 .list {
-  position: relative; }
+  position: relative;
+}
 
 .list-item {
   position: absolute;
   border-radius: 5px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  overflow: hidden; }
-  .list-item img {
-    width: 100%; }
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+}
 
 .more-btn {
   font-size: 12px;
   color: red;
-  text-align: center; }
-
-/*# sourceMappingURL=Body.css.map */
+  text-align: center;
+}

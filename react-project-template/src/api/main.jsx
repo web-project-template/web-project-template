@@ -1,13 +1,27 @@
 import {get, post} from "./http"
 
-export function getChengXiao(params) {
-  let url = `./data/chengxiao.json`
-  return get(url, params)
+export function getChengXiao() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let data = []
+      for (var i = 0; i < 2; i++) {
+        data.push(`./imgs/cx0${Math.ceil(Math.random() * 8)}.jpg`)
+      }
+      resolve(data)
+    }, Math.random() * 500)
+  })
 }
 
 export function getOuYangNaNa(params) {
-  let url = `./data/ouyangnana.json`
-  return get(url, params)
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let data = []
+      for (var i = 0; i < 10; i++) {
+        data.push(`./imgs/oynn0${Math.ceil(Math.random() * 8)}.jpg`)
+      }
+      resolve(data)
+    }, Math.random() * 500)
+  })
 }
 
 export function postVwordSetCurrentRegion(params) {

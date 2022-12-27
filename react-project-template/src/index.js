@@ -10,7 +10,7 @@ import {/*BrowserRouter,*/HashRouter} from 'react-router-dom';
 // react-router-dom 更多的一些选项
 // 路由传参
 // params 方式进行传参
-// 1、需要在路由跪着中设置传递的接受阐述：xxx
+// 1、需要在路由规则中设置传递的接受参数：xxx
 // 优势：刷新地址，参数依然存在
 // 缺点：只能传递字符串，并且 参数过多的时候url会变得比较丑陋
 

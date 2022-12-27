@@ -5,7 +5,7 @@ import Pobsub from 'pubsub-js';
 export default class Header extends Component {
   static defaultProps = {
     mainTitle: "",
-    subTitle: ""
+    subTitle: "子标题"
   }
 
   constructor() {
@@ -29,6 +29,7 @@ export default class Header extends Component {
       <div className={'home-header'}>
         <h2>{this.props.mainTitle}<span>&nbsp;&nbsp;{this.props.subTitle}</span></h2>
         <div className={'scroller'}>
+          {/*<button onClick={this.onClickSubNav.bind(this, 'all')}>全部</button>*/}
           <button onClick={this.onClickSubNav.bind(this, 'CX')}>程潇</button>
           <button onClick={this.onClickSubNav.bind(this, 'OYNN')}>欧阳娜娜</button>
           <button onClick={() => this.props.funa('子传父,蔡徐坤')}>蔡徐坤</button>

@@ -8,7 +8,7 @@ import UserEdit from "./user/UserEdit";
 
 
 // Hook 是react 16.7新增的一个特性，主要是用来让无状态组件可以使用状态，在react开发中状态的管理是必不可少的
-// 以前问了惊喜状态的需要使用类组件活着redux等来管理
+// 以前为了进行状态的需要使用类组件或者redux等来管理
 
 // 需求场景
 //
