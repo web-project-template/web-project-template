@@ -1,5 +1,4 @@
 /* eslint-disable */
-import './Body.css'
 import React, {Component} from 'react'
 import Pobsub from 'pubsub-js'
 import {getChengXiao, /*getOuYangNaNa*/} from "../../api"
@@ -107,17 +106,7 @@ export default class Body extends Component {
               }} key={idx}>
                 <div>
                   <img src={(item.url) || './default.gif'}/>
-                  {/*<p>xxx</p>*/}
                 </div>
-                {/*<div className="list-item-inner">
-                  <div className="list-item-img">
-
-                    <img src='./default.gif' data-src={item.url} alt=""/>
-                  </div>
-                  <div className="list-item-desc">
-                    <p>{item.title}</p>
-                  </div>
-                </div>*/}
               </div>)
             })
           }

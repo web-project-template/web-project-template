@@ -1,27 +1,29 @@
-import './Home.css';
-import Header from './Header';
-import Body from './Body';
-import React, {Component} from 'react';
+/* eslint-disable */
+import './Home.css'
+import React, {Component, lazy} from 'react'
+import Header from './Header'
+import Body from './Body'
 
 export default class Home extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      msg: ""
-    };
+  state = {
+    currentNavigation: ""
   }
 
-  funa = (txt) => {
-    console.log("收到子传父数据：", txt)
+  constructor(props) {
+    super(props)
+  }
+
+  changeNavigation = (value) => {
+    console.log("收到子传父数据：", value)
+    this.setState({currentNavigation: value})
   }
 
   render() {
     return (
-      <div className="app-home">
-        <Header mainTitle='图片欣赏' funa={this.funa}/>
-        <Body/>
+      <div className="home">
+        <Header mainTitle='图片欣赏' changeNavigation={this.changeNavigation}/>
+        <Body currentNavigation={this.state.currentNavigation}/>
       </div>
     )
   }
