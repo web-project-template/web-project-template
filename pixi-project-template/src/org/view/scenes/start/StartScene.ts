@@ -28,7 +28,7 @@ export default class StartScene extends Scene {
     _stage1Container.addChild(_t1);
     _t1.position.y = -stageHeight;
     _t1.alpha = 0;
-    window.TweenMax.to(_t1, 1, {alpha: 1, ease: window.window.Strong.easeOut, delay: 0.6});
+    window.TweenMax.to(_t1, 1, {alpha: 1, ease: window.Strong.easeOut, delay: 0.6});
     _t1.name = "t1.png";
 
     let dragObj = new DragContainer()
