@@ -8,6 +8,7 @@ yarn-error.log*
 
 .idea
 .vscode
+.sass-cache
 *.suo
 *.ntvs*
 *.njsproj

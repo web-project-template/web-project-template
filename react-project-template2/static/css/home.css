@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  color: #333; }
+  #root header {
+    flex: 0 0 auto;
+    background-color: #b3c0d1;
+    line-height: 60px; }
+  #root > section {
+    display: flex;
+    flex: 1 0 0; }
+    #root > section aside {
+      display: flex;
+      flex: 0 0 20%;
+      justify-content: center;
+      align-items: center;
+      background-color: #d3dce6; }
+    #root > section main {
+      display: flex;
+      flex: 1 0 0;
+      justify-content: center;
+      align-items: center;
+      background-color: #e9eef3; }
+  #root footer {
+    flex: 0 0 auto;
+    background-color: #b3c0d1;
+    line-height: 60px; }
+
+/*# sourceMappingURL=home.css.map */

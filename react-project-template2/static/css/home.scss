@@ -1,0 +1,44 @@
+@import "reset";
+
+#root {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  color: #333;
+
+  header {
+    flex: 0 0 auto;
+    background-color: #b3c0d1;
+    line-height: 60px;
+  }
+
+  > section {
+    display: flex;
+    flex: 1 0 0;
+
+    aside {
+      display: flex;
+      flex: 0 0 20%;
+      justify-content: center;
+      align-items: center;
+      background-color: #d3dce6;
+    }
+
+    main {
+      display: flex;
+      flex: 1 0 0;
+      justify-content: center;
+      align-items: center;
+      background-color: #e9eef3;
+    }
+  }
+
+  footer {
+    flex: 0 0 auto;
+
+    background-color: #b3c0d1;
+    line-height: 60px;
+  }
+}
