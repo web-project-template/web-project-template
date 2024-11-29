@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/task.9456c970.chunk.css","mappings":"AAAA,cACE,+BAAgC,CAChC,iBACF,CAEA,WACE,WACF,CAEA,0BACE,aACF","sources":["pages/task/Task.css"],"sourcesContent":[".task-page h2 {\n  border-bottom: 1px solid #e4e4e4;\n  text-align: center;\n}\n\n.task-body {\n  padding: 8px;\n}\n\n.list-group-item > div span {\n  padding: 0 5px;\n}"],"names":[],"sourceRoot":""}

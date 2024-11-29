@@ -1,0 +1,12 @@
+.task-page h2 {
+  border-bottom: 1px solid #e4e4e4;
+  text-align: center;
+}
+
+.task-body {
+  padding: 8px;
+}
+
+.list-group-item > div span {
+  padding: 0 5px;
+}
