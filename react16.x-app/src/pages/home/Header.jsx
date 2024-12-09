@@ -3,41 +3,47 @@ import Pobsub from 'pubsub-js'
 
 export default class Header extends Component {
   static defaultProps = {
-    mainTitle: "",
+    mainTitle: "图片欣赏",
     subTitle: "子标题"
   }
 
   constructor() {
     super()
-
-    this.state = {
-      curSubTab: "CX"
-    }
   }
 
-  onClickSubNav(data, evt) {
-    if (this.state.curSubTab !== data) {
-      // console.log('切换subtab:', data, evt)
-      Pobsub.publish(`CLICK_${data}`)
-      this.setState({curSubTab: data})
+  onClickSubNav = (event) => {
+    const name = event.currentTarget.getAttribute('data-name')
+    if (this.props.currentNavigation !== name) {
+      Pobsub.publish(`CHANGE_CURRENT_NAV`, name)
     }
   }
 
   render() {
+    const {mainTitle, subTitle} = this.props;
+    var navList = [
+      '全部',
+      '程潇',
+      '欧阳娜娜',
+      '蔡徐坤',
+      'Lisa',
+      '莫文蔚',
+      '蔡健雅',
+      '任家萱',
+      '田馥甄',
+      '陈嘉桦',
+    ]
     return (
       <div className={'home-header'}>
-        {this.props.mainTitle && <h2>{this.props.mainTitle}<span>&nbsp;&nbsp;{this.props.subTitle}</span></h2>}
+        <h2>
+          {mainTitle}
+          <span>&nbsp;&nbsp;{subTitle}</span>
+        </h2>
         <div className={'scroller'}>
-          <button onClick={this.onClickSubNav.bind(this, 'all')}>全部</button>
-          <button onClick={this.onClickSubNav.bind(this, 'CX')}>程潇</button>
-          <button onClick={this.onClickSubNav.bind(this, 'OYNN')}>欧阳娜娜</button>
-          <button onClick={() => this.props.changeNavigation('子传父,蔡徐坤')}>蔡徐坤</button>
-          <button onClick={() => this.props.changeNavigation('子传父,Lisa')}>Lisa</button>
-          <button onClick={() => Pobsub.publish("CLICK_VIEW", '兄弟传值,莫文蔚')}>莫文蔚</button>
-          <button onClick={() => Pobsub.publish("CLICK_NAVIGATION", '兄弟传值,蔡健雅')}>蔡健雅</button>
-          <button onClick={() => this.props.changeNavigation('任家萱')}>任家萱（Selina）</button>
-          <button onClick={() => this.props.changeNavigation('田馥甄')}>田馥甄（Hebe）</button>
-          <button onClick={() => this.props.changeNavigation('陈嘉桦')}>陈嘉桦（Ella）</button>
+          {
+            navList.map((val, index) => {
+              return <button key={index} data-name={val} onClick={this.onClickSubNav}>{val}</button>
+            })
+          }
         </div>
       </div>
     )

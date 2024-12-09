@@ -2,6 +2,7 @@ import './index.css'
 import React, {Component} from 'react'
 import Header from './Header'
 import Body from './Body'
+import Pobsub from 'pubsub-js'
 
 export default class Home extends Component {
   state = {
@@ -10,16 +11,16 @@ export default class Home extends Component {
 
   constructor(props) {
     super(props)
-  }
 
-  changeNavigation = (value) => {
-    this.setState({currentNavigation: value})
+    Pobsub.subscribe("CHANGE_CURRENT_NAV", (type, data) => {
+      this.setState({currentNavigation: data})
+    })
   }
 
   render() {
     return (
       <div className="home">
-        <Header mainTitle='图片欣赏' changeNavigation={this.changeNavigation}/>
+        <Header currentNavigation={this.state.currentNavigation}/>
         <Body currentNavigation={this.state.currentNavigation}/>
       </div>
     )

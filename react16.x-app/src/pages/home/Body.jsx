@@ -1,7 +1,5 @@
-/* eslint-disable */
 import React, {Component} from 'react'
-import Pobsub from 'pubsub-js'
-import {getChengXiao, /*getOuYangNaNa*/} from "../../api"
+import {getIdolImages} from "../../api"
 
 export default class Body extends Component {
 
@@ -13,39 +11,30 @@ export default class Body extends Component {
       columnMaxHeight: 0,
       showList: []
     }
-
-    Pobsub.subscribe("CLICK_VIEW", (type, data) => {
-      console.log("收到兄弟节点传来的数据：", data)
-    })
-
-    Pobsub.subscribe("CLICK_NAVIGATION", (type, data) => {
-      console.log("收到兄弟节点传来的数据：", data)
-    })
-
-    Pobsub.subscribe("CLICK_CX", (type, data) => {
-      this.setState({showList: []})
-    })
-
-    Pobsub.subscribe("CLICK_OYNN", (type, data) => {
-      this.setState({showList: []})
-    })
   }
 
-  onClickMoreBtn() {
+  onClickMoreBtn(name = '全部') {
     if (this.state.loading) return
+    this.getIdolImages(name)
+  }
 
+  resetPhotoWallState() {
+    this.setState({
+      columnMaxHeight: 0,
+      showList: [],
+    })
+    this.columnHeightArr = Array.apply(null, {length: this.columnCount}).map(() => 0)
+  }
+
+  getIdolImages(name = '全部') {
     this.setState({loading: true})
-    getChengXiao().then(res => {
+    getIdolImages({name}).then(res => {
       this.setState({loading: false})
-      this.load(res.map(item => item))
+      this.loadImages(res.map(item => item))
     })
   }
 
-  loadMore() {
-
-  }
-
-  async load(arr) {
+  async loadImages(arr) {
     for (let i = 0; i < arr.length; i++) {
       let url = arr[i]
       let image = await asyncLoadImage(url).catch(err => {
@@ -76,9 +65,15 @@ export default class Body extends Component {
     }
   }
 
-  async componentDidMount() {
-    // console.log("componentDidMount");
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.currentNavigation !== this.props.currentNavigation) {
+      this.resetPhotoWallState();
+      this.getIdolImages(this.props.currentNavigation)
+    }
+  }
 
+  async componentDidMount() {
+    console.log('currentNavigation=', this.props.currentNavigation)
     let {columnCount, columnWidth, columnGap} = calculate()
 
     this.columnGap = columnGap
@@ -90,6 +85,7 @@ export default class Body extends Component {
   }
 
   render() {
+    const {currentNavigation} = this.props;
     return (
       <div className="home-body">
         <div className="list" style={{height: this.state.columnMaxHeight + 'px'}}>
