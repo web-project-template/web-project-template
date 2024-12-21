@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none; }
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; }
+
+.seasun-layout .seasun-global-header .seasun-global-header-logo {
+  flex: 0 0 200px;
+  border-right: 1px solid rgba(5, 5, 5, 0.06);
+  margin-right: 0; }
+
+/*# sourceMappingURL=App.css.map */
