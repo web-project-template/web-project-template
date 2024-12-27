@@ -1,0 +1,13 @@
+.global-api-loading {
+    pointer-events: auto;
+    position: absolute;
+    top: -8px;
+    left: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5)
+}

@@ -17,6 +17,11 @@ var route = {
   path: '/',
   routes: [
     {
+      path: '/Loading',
+      name: '加载中(Loading)',
+      icon: <ChromeFilled/>,
+    },
+    {
       path: '/Button',
       name: '按钮(Button)',
       icon: <ChromeFilled/>,

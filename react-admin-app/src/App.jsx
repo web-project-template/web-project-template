@@ -8,6 +8,7 @@ import Login from './pages/Login/index'
 import Logout from './pages/Logout/index'
 import Dashboard from './pages/Dashboard/index'
 import User from './pages/User/index'
+import Loading from './pages/Loading/index'
 import Button from './pages/Button/index'
 import Icons from './pages/Icons/index'
 import Input from './pages/Input/index'
@@ -27,6 +28,7 @@ export default function App() {
             <Route path='/Dashboard' exact component={Dashboard}/>
             <Route path='/User' exact component={User}/>
 
+            <Route path='/Loading' exact component={Loading}/>
             <Route path='/Button' exact component={Button}/>
             <Route path='/Icons' exact component={Icons}/>
             <Route path='/Input' exact component={Input}/>
