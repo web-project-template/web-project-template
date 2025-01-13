@@ -17,6 +17,6 @@ export default function ButtonDemo() {
     }
 
     return (
-        <Button type="primary" onClick={onClickBtn}>显示加载</Button>
+        <Button type="primary" onClick={onClickBtn}>显示全局加载</Button>
     )
 }
