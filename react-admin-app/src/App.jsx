@@ -15,6 +15,8 @@ import Input from './pages/Input/index'
 import Table from './pages/Table/index'
 import PageContainer from './pages/PageContainer/index'
 import Modal from './pages/Modal/index'
+import RefreshPage from './pages/RefreshPage/index'
+import UpdateSearchParams from './pages/UpdateSearchParams/index'
 
 export default function App() {
   return (
@@ -29,6 +31,8 @@ export default function App() {
             <Route path='/Dashboard' exact component={Dashboard}/>
             <Route path='/User' exact component={User}/>
 
+            <Route path='/UpdateSearchParams' exact component={UpdateSearchParams}/>
+            <Route path='/RefreshPage' exact component={RefreshPage}/>
             <Route path='/Modal' exact component={Modal}/>
             <Route path='/Loading' exact component={Loading}/>
             <Route path='/Button' exact component={Button}/>

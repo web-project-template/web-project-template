@@ -17,6 +17,16 @@ var route = {
     path: '/',
     routes: [
         {
+            path: '/RefreshPage',
+            name: '刷新页面(RefreshPage)',
+            icon: <ChromeFilled/>,
+        },
+        {
+            path: '/UpdateSearchParams',
+            name: '动态更新参数(UpdateSearchParams)',
+            icon: <ChromeFilled/>,
+        },
+        {
             path: '/Modal',
             name: '对话框(Modal)',
             icon: <ChromeFilled/>,
