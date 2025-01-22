@@ -70,7 +70,7 @@ export default (props) => {
         history.push(`/${key}`);
     };
 
-    console.log(location)
+    // console.log(location)
     const fullScreenPath = [
         '/Login',
         '/Logout'
@@ -99,6 +99,7 @@ export default (props) => {
             menu={{
                 // 菜单收起时，显示菜单名字
                 collapsedShowGroupTitle: true,
+                defaultOpenAll: true
             }}
             avatarProps={{
                 src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',

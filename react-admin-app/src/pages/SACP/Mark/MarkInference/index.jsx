@@ -1,7 +1,5 @@
 export default () => {
     return (
-        <>
-            首页
-        </>
+        <div>推理信息</div>
     )
 }

@@ -2,7 +2,7 @@
 
 ## 简介
 
-React Admin App 是一个免费开源的中后台模版。使用了最新的`react 18.x`,`react-router 6.x`,`@reduxjs/toolkit`,`antd5.x`等主流技术开发，开箱即用的中后台前端解决方案，也可用于学习参考。
+React Admin App 是一个免费开源的中后台模版。使用了最新的`react 18.x`,`react-router 6.x`,`antd5.x`等主流技术开发，开箱即用的中后台前端解决方案，也可用于学习参考。
 模板集成了基础权限、国际化以及各种常用组件。
 
 ## 目录结构
@@ -16,7 +16,7 @@ React Admin App 是一个免费开源的中后台模版。使用了最新的`rea
 │   ├─ assets                 # 静态资源
 │   ├─ components             # 全局公用组件
 │   ├─ config                 # 全局配置
-│   │   ├─ constant.js        # 基础常量
+│   │   └─ constant.js        # 基础常量
 │   ├─ icons                  # svg资源
 │   ├─ layouts                # layout
 │   ├─ vendor                 # 第三方库按需加载
@@ -28,7 +28,7 @@ React Admin App 是一个免费开源的中后台模版。使用了最新的`rea
 │   ├─ views                  # 页面集合
 │   ├─ App.js                 # 入口页面
 │   ├─ defaultSettings.js     # 全局默认配置
-│   └─index.js                # 入口文件
+│   └─ index.js               # 入口文件
 ├── .env.development          # 开发环境变量配置
 ├── .env.production           # 生产环境变量配置
 ├── config-overrides.js       # 对cra的webpack自定义配置
@@ -40,17 +40,25 @@ React Admin App 是一个免费开源的中后台模版。使用了最新的`rea
 
 ```bash
 # 克隆项目
-git clone https://github.com/mvpyb/react-ant-admin.git
+git clone https://github.com/cengbin/react-admin-app.git
 
 # 进入项目目录
-cd vite-element-plus-admin
+cd react-admin-app
 
 # 安装依赖
 npm install
 
 # 建议不要用 cnpm 安装 会有各种诡异的bug 可以通过如下操作解决 npm 下载速度慢的问题
-npm install --registry=https://registry.npm.taobao.org
+npm install --https://registry.npmmirror.com
 
 # 启动服务
 npm run dev
 ```
+
+## 技术栈
+
+1. react
+2. react-router-dom
+2. antd
+3. @ant-design/icons 
+4. @ant-design/pro-components

@@ -1,3 +1,6 @@
+@import './theme/vars';
+@import './theme/custom';
+
 * {
   margin: 0;
   padding: 0;
@@ -38,10 +41,28 @@ a {
 
   .seasun-layout-content {
     padding: 8px 8px 0 8px;
-    border: 1px solid black;
+    //border: 1px solid black;
+  }
+
+  .ant-layout {
+    height: 100vh;
+  }
+
+  .seasun-sider .ant-layout-sider-children {
+    padding: 0;
   }
 }
 
-.ant-layout {
+.global-api-loading {
+  pointer-events: auto;
+  position: absolute;
+  top: -8px;
+  left: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
   height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5)
 }

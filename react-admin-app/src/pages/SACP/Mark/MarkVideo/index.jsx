@@ -1,7 +1,5 @@
 export default () => {
     return (
-        <>
-            首页
-        </>
+        <div>视频列表</div>
     )
 }
