@@ -6,10 +6,22 @@
   position: absolute;
   border-radius: 5px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  line-height: 0;
+  //overflow: hidden;
+  //line-height: 0;
+  height: auto;
 
   img {
+    display: block;
     width: 100%;
+  }
+
+  .footer {
+    //padding: 8px;
+    white-space: normal;
+    word-break: break-all;
+
+    p {
+      padding: 4px 8px;
+    }
   }
 }

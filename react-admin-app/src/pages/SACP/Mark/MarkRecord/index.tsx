@@ -272,9 +272,10 @@ export default () => {
                     dataSource={markList}
                     renderItem={(item) => <MarkItem item={item} onAction={onAction} key={item.keyframe_id}/>}
                 />*/}
-                <Waterfall footerRender={()=>{
-                    return <div>
-                        123
+                <Waterfall footerRender={(item: any, index: any) => {
+                    return <div className='footer'>
+                        <p>索引 = {index}</p>
+                        <p>图片地址 = {item.url}</p>
                     </div>
                 }}></Waterfall>
             </Card>
