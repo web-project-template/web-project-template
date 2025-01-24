@@ -28,7 +28,7 @@ import MarkVideo from './pages/SACP/Mark/MarkVideo/index'
 import MarkImage from './pages/SACP/Mark/MarkImage/index'
 import MarkInference from './pages/SACP/Mark/MarkInference/index'
 import QualityInspection from './pages/SACP/Mark/QualityInspection/index'
-import MarkList from '@/pages/SACP/Mark/MarkRecord/index'
+import MarkRecord from '@/pages/SACP/Mark/MarkRecord/index'
 
 export default function App() {
     return (
@@ -47,7 +47,7 @@ export default function App() {
                         <Route path='/SACP/Mark/MarkVideo' exact component={MarkVideo}/>
                         <Route path='/SACP/Mark/MarkInference' exact component={MarkInference}/>
                         <Route path='/SACP/Mark/QualityInspection' exact component={QualityInspection}/>
-                        <Route path='/SACP/Mark/MarkList' exact component={MarkList}/>
+                        <Route path='/SACP/Mark/MarkRecord' exact component={MarkRecord}/>
 
                         <Route path='/AntDesign/Form/Form' exact component={Form}/>
                         <Route path='/AntDesign/Form/Select' exact component={Select}/>

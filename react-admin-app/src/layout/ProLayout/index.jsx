@@ -145,7 +145,9 @@ export default (props) => {
             )}
             collapsedButtonRender={() => null}
         >
-            {children}
+            <div className="content-container">
+                {children}
+            </div>
         </ProLayout>
     );
 };

@@ -11,7 +11,7 @@ export default () => {
     const history = useHistory();
     const onAction = createActionFun({
         [ActionType.CHECK](data: any) {
-            history.push(`/SACP/Mark/MarkList?id=${data.id}`)
+            history.push(`/SACP/Mark/MarkRecord?id=${data.id}`)
         }
     })
     const columns = getColumns({onAction})
