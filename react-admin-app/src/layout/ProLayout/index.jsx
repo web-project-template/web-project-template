@@ -55,7 +55,7 @@ export default (props) => {
 
     const items = [
         {
-            key: 'User',
+            key: 'UserCenter',
             icon: <UserOutlined/>,
             label: '个人中心',
         },

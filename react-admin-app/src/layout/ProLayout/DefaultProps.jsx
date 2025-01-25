@@ -26,7 +26,7 @@ const route = {
                     path: "Illegal"
                 },
                 {
-                    name: "标注",
+                    name: "标注管理",
                     path: "Mark",
                     routes: [
                         {
@@ -45,11 +45,24 @@ const route = {
                             name: "标注质检",
                             path: "QualityInspection"
                         },
-                        /*{
-                            name: "标注图片列表",
-                            path: "MarkList",
-                            hideInMenu: true,
-                        },*/
+                    ]
+                },
+                {
+                    name: '系统配置',
+                    path: "System",
+                    routes: [
+                        {
+                            name: "用户管理",
+                            path: "User"
+                        },
+                        {
+                            name: "角色管理",
+                            path: "Rule"
+                        },
+                        {
+                            name: "菜单管理",
+                            path: "Menu"
+                        },
                     ]
                 }
             ]

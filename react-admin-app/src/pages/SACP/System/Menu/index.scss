@@ -1,0 +1,18 @@
+.ant-tree {
+  .ant-tree-treenode {
+    width: 100%;
+
+    .ant-tree-node-content-wrapper {
+      display: flex;
+      flex: 1;
+
+      .ant-tree-title {
+        flex: 1;
+
+        .ant-tag {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ import ProLayout from './layout/ProLayout/index'
 import Login from './pages/Login/index'
 import Logout from './pages/Logout/index'
 import Dashboard from './pages/Dashboard/index'
-import User from './pages/User/index'
+import UserCenter from './pages/UserCenter/index'
 
 import Form from './pages/AntDesign/Form/Form/index'
 import Select from '@/pages/AntDesign/Form/Select/index'
@@ -28,7 +28,11 @@ import MarkVideo from './pages/SACP/Mark/MarkVideo/index'
 import MarkImage from './pages/SACP/Mark/MarkImage/index'
 import MarkInference from './pages/SACP/Mark/MarkInference/index'
 import QualityInspection from './pages/SACP/Mark/QualityInspection/index'
-import MarkRecord from '@/pages/SACP/Mark/MarkRecord/index'
+import MarkRecord from './pages/SACP/Mark/MarkRecord/index'
+
+import User from '@/pages/SACP/System/User/index'
+import Rule from '@/pages/SACP/System/Rule/index'
+import Menu from '@/pages/SACP/System/Menu/index'
 
 export default function App() {
     return (
@@ -41,13 +45,17 @@ export default function App() {
                         <Route path='/Logout' exact component={Logout}/>
 
                         <Route path='/Dashboard' exact component={Dashboard}/>
-                        <Route path='/User' exact component={User}/>
+                        <Route path='/UserCenter' exact component={UserCenter}/>
 
                         <Route path='/SACP/Mark/MarkImage' exact component={MarkImage}/>
                         <Route path='/SACP/Mark/MarkVideo' exact component={MarkVideo}/>
                         <Route path='/SACP/Mark/MarkInference' exact component={MarkInference}/>
                         <Route path='/SACP/Mark/QualityInspection' exact component={QualityInspection}/>
                         <Route path='/SACP/Mark/MarkRecord' exact component={MarkRecord}/>
+
+                        <Route path='/SACP/System/User' exact component={User}/>
+                        <Route path='/SACP/System/Rule' exact component={Rule}/>
+                        <Route path='/SACP/System/Menu' exact component={Menu}/>
 
                         <Route path='/AntDesign/Form/Form' exact component={Form}/>
                         <Route path='/AntDesign/Form/Select' exact component={Select}/>
