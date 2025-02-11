@@ -1,5 +1,5 @@
 import {ProColumnType} from '@ant-design/pro-components'
-import type {OptionConfig} from '@ant-design/pro-table/es/components/ToolBar'
+import {OptionConfig} from '@ant-design/pro-table/es/components/ToolBar'
 
 /**
  * ProTable 组件的默认属性

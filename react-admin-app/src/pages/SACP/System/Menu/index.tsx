@@ -1,85 +1,78 @@
-// @ts-nocheck
-import React, {useState, useCallback, useRef, useEffect} from 'react';
-import {
-    Row,
-    Col,
-    Tag,
-    Flex,
-    Tree,
-    Empty,
-    Button,
-    message,
-    Tooltip,
-    Popconfirm,
-    Space
-} from 'antd';
-
+import React, {useState, useCallback, useEffect} from 'react';
+import {Row, Col, Tag, Tree, Empty, Button, Tooltip, Popconfirm, Space} from 'antd';
+import {EditTwoTone, PlusOutlined} from "@ant-design/icons";
 import {ProCard, ProTable} from '@ant-design/pro-components';
-
-import {TreeDataNode, TreeProps} from 'antd';
-
-import './index.scss';
-import MenuData from './MenuData';
 import {ProColumns} from "@ant-design/pro-table/es/typing";
-import {EditTwoTone, FileOutlined, PlusOutlined, SmileOutlined} from "@ant-design/icons";
 
-import * as AntDesignIcons from '@ant-design/icons';
+import {getIcon} from "@/utils/menu";
+import {Menu} from '@/services/modules/Menu';
+import usePopup from '@/hooks/usePopup';
 
-export const IconMap = {
-    smile: <SmileOutlined/>,
-    file: <FileOutlined/>,
-}
+import Create from './Create';
+import ActionCreate from './action/Create';
+import {MenuData, MenuActionData, MenuTreeNode} from './types';
+import './index.scss';
 
-export const getIcon = (icon) => {
-    if (IconMap[icon]) {
-        return IconMap[icon];
-    } else if (icon && typeof icon === 'string') {
-        let fixIconName =
-            icon.slice(0, 1).toLocaleUpperCase() + icon.slice(1) + 'Outlined';
-        if (AntDesignIcons[fixIconName] || AntDesignIcons[icon]) {
-            return React.createElement(AntDesignIcons[fixIconName] || AntDesignIcons[icon]);
-        }
-    }
-
-    return null;
-};
-
-export const convertMenu = (menus: any) => {
-    return menus?.map((item: any) => {
-        const newItem: any = {
-            // ...item,
+export const convertMenu = (menus: MenuData[]): MenuTreeNode[] => {
+    return menus?.map((item: MenuData) => {
+        return {
+            data: item,
             icon: getIcon(item.icon),
             title: item.name,
             key: item.id,
-            disabled: item.status === 0
-        };
-
-        if (item.routes?.length) {
-            let res = convertMenu(item.routes);
-            if (res.length > 0) {
-                newItem.children = res;
-            }
+            disabled: item.status === 0,
+            children: item.routes && convertMenu(item.routes)
         }
-
-        return newItem;
     });
 };
 
 export default () => {
-    const [treeData, setTreeData] = useState<TreeDataNode[]>([]);
+    const [menuTreeData, setMenuTreeData] = useState<MenuTreeNode[]>([]);
+    const [selectedMenuId, setSelectedMenuId] = useState<number | null>(null);
+    const [menuActionList, setMenuActionList] = useState<MenuActionData[]>([]);
+    const {visible: menuModalVisible, setVisible: setMenuModalVisible, show: showMenuModal} = usePopup();
+    const {
+        visible: menuActionModalVisible,
+        setVisible: setMenuActionModalVisible,
+        show: showMenuActionModal
+    } = usePopup();
+    const [menuEditData, setMenuEditData] = useState<MenuData | null>(null);
+    const [menuActionEditData, setMenuActionEditData] = useState<MenuActionData | null>(null);
 
-    useEffect(() => {
-        const data = [
+    const fetchMenuList = async () => {
+        const result = await Menu.getMenuList();
+        setMenuTreeData([
             {
+                id: 0,
+                key: 0,
                 title: '反作弊系统',
-                key: 1,
-                children: convertMenu(MenuData.data),
+                children: convertMenu(result.data),
                 disabled: true
             }
-        ]
-        setTreeData(data)
+        ]);
+    };
+
+    const fetchMenuActionList = async (menuId: number) => {
+        const result = await Menu.getMenuActionList({menuId});
+        setMenuActionList(result.data || []);
+    };
+
+    useEffect(() => {
+        fetchMenuList();
     }, []);
 
+    const handleTreeSelect = (selectedKeys: React.Key[]) => {
+        if (selectedKeys.length === 0) {
+            setSelectedMenuId(null);
+            setMenuActionList([]);
+            return;
+        }
+        const menuId = selectedKeys[0] as number;
+        setSelectedMenuId(menuId)
+        if (menuId && menuId !== 1) { // 排除根节点
+            fetchMenuActionList(menuId);
+        }
+    };
 
     const titleRender = useCallback((nodeData: any) => {
         return (
@@ -96,6 +89,11 @@ export default () => {
                             >
                                 <PlusOutlined
                                     style={{fontSize: '18px', color: 'var(--primary)'}}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedMenuId(nodeData.id);
+                                        showMenuModal();
+                                    }}
                                 />
                             </Tooltip>
 
@@ -105,6 +103,12 @@ export default () => {
                             >
                                 <EditTwoTone
                                     style={{fontSize: '18px'}}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedMenuId(nodeData.id);
+                                        setMenuEditData(nodeData.data);
+                                        showMenuModal();
+                                    }}
                                 />
                             </Tooltip>
 
@@ -145,13 +149,14 @@ export default () => {
     const renderLeftTree = () => {
         return (
             <ProCard className={'menu-card'}>
-                {treeData?.length > 0 ? (
+                {menuTreeData?.length > 0 ? (
                     <Tree
                         showIcon
                         showLine={false}
-                        treeData={treeData}
-                        defaultExpandedKeys={[1]}
+                        treeData={menuTreeData}
+                        defaultExpandedKeys={[0]}
                         titleRender={titleRender}
+                        onSelect={handleTreeSelect}
                     />
                 ) : (
                     <Empty/>
@@ -160,16 +165,89 @@ export default () => {
         );
     };
 
-    const request = async () => {
-        return {}
-    }
-    const columns: ProColumns[] = []
+    const columns: ProColumns[] = [
+        {
+            title: '名称',
+            dataIndex: 'name',
+            width: 150,
+            align: 'left',
+        },
+        {
+            title: '编码',
+            dataIndex: 'code',
+            width: 100,
+            align: 'left',
+        },
+        {
+            title: '状态',
+            dataIndex: 'state',
+            width: 100,
+            align: 'center',
+            render: (state) => (
+                <Tag color={state === 1 ? 'success' : 'error'}>
+                    {state === 1 ? '启用' : '停用'}
+                </Tag>
+            ),
+        },
+        {
+            title: "创建时间",
+            dataIndex: 'create_time',
+            width: 150,
+            align: 'center',
+        },
+        {
+            title: "更新时间",
+            dataIndex: 'update_time',
+            width: 150,
+            align: 'center',
+        },
+        {
+            title: "操作",
+            dataIndex: 'operate',
+            width: 200,
+            align: 'center',
+            render(value, record: any) {
+                return (
+                    <div className='operate'>
+                        <Tag>授权</Tag>
+                        <Tag onClick={() => {
+                            setMenuActionEditData(record);
+                            showMenuActionModal();
+                        }}>编辑</Tag>
+                        {record.state === 1 ? (
+                            <Popconfirm
+                                title={'确定要停用吗？'}
+                                okText={'确定'}
+                                cancelText={'取消'}
+                            >
+                                <Tag
+                                    color="var(--error)"
+                                >
+                                    停用
+                                </Tag>
+                            </Popconfirm>
+
+                        ) : (
+                            <Tag
+                                color="var(--primary)"
+                            >
+                                启用
+                            </Tag>
+                        )}
+                    </div>
+                )
+            }
+        },
+    ];
 
     const headerTitle = () => {
         return (
             <Button
+                disabled={!selectedMenuId}
                 type="primary"
-                icon={<PlusOutlined/>}
+                onClick={() => {
+                    showMenuActionModal();
+                }}
             >
                 增加功能
             </Button>
@@ -180,21 +258,52 @@ export default () => {
         return (
             <ProTable<any>
                 rowKey="id"
-                cardBordered
+                options={false}
+                cardBordered={false}
                 search={false}
-                request={request}
+                dataSource={menuActionList}
                 columns={columns}
                 headerTitle={headerTitle()}
+                scroll={{x: 'max-content'}}
+                style={{width: '100%', overflow: 'auto'}}
             />
         );
     };
 
+    const handleMenuModalVisibleChange = (visible: boolean) => {
+        setMenuModalVisible(visible);
+        if (!visible) {
+            setMenuEditData(null);
+        }
+    };
+
+    const handleMenuActionModalVisibleChange = (visible: boolean) => {
+        setMenuActionModalVisible(visible);
+        if (!visible) {
+            setMenuActionEditData(null);
+        }
+    };
+
     return (
-        <>
-            <Row gutter={16}>
-                <Col flex='500px'>{renderLeftTree()}</Col>
+        <div className='menu-page'>
+            <Row gutter={16} wrap={false} style={{width: '100%'}}>
+                <Col flex='400px'>{renderLeftTree()}</Col>
                 <Col flex='auto'>{renderRightTable()}</Col>
             </Row>
-        </>
+            {
+                menuModalVisible && <Create
+                    visible={menuModalVisible}
+                    setVisible={handleMenuModalVisibleChange}
+                    data={menuEditData}
+                />
+            }
+            {
+                menuActionModalVisible && <ActionCreate
+                    visible={menuActionModalVisible}
+                    setVisible={handleMenuActionModalVisibleChange}
+                    data={menuActionEditData}
+                />
+            }
+        </div>
     );
 };

@@ -274,7 +274,8 @@ export default () => {
                     dataSource={markList}
                     renderItem={(item) => <MarkItem item={item} onAction={onAction} key={item.keyframe_id}/>}
                 />*/}
-                <Waterfall images={images} footerRender={(item: any, index: any) => {
+
+                <Waterfall mode='fixed-width' images={images} footerRender={(item: any, index: any) => {
                     return <div className='footer'>
                         <p>索引 = {index}</p>
                         <p>图片地址 = {item.url}</p>

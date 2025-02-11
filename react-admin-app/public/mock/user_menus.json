@@ -1,0 +1,134 @@
+{
+  "code": 0,
+  "data": [
+    {
+      "id": 100,
+      "name": "AGI",
+      "icon": "heart",
+      "path": "AGI"
+    },
+    {
+      "id": 200,
+      "name": "SACP",
+      "icon": "FireOutlined",
+      "path": "SACP",
+      "routes": [
+        {
+          "name": "违规业务",
+          "path": "Illegal"
+        },
+        {
+          "name": "标注管理",
+          "path": "Mark",
+          "routes": [
+            {
+              "name": "视频列表",
+              "path": "MarkVideo"
+            },
+            {
+              "name": "图片列表",
+              "path": "MarkImage"
+            },
+            {
+              "name": "推理信息",
+              "path": "MarkInference"
+            },
+            {
+              "name": "标注质检",
+              "path": "QualityInspection"
+            }
+          ]
+        },
+        {
+          "name": "系统配置",
+          "path": "System",
+          "routes": [
+            {
+              "name": "用户管理",
+              "path": "User"
+            },
+            {
+              "name": "角色管理",
+              "path": "Rule"
+            },
+            {
+              "name": "菜单管理",
+              "path": "Menu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 300,
+      "name": "AntDesign",
+      "icon": "SmileOutlined",
+      "path": "AntDesign",
+      "routes": [
+        {
+          "name": "数据录入",
+          "path": "Form",
+          "routes": [
+            {
+              "name": "表单(Form)",
+              "path": "AntForm"
+            },
+            {
+              "path": "Input",
+              "name": "输入框(Input)"
+            },
+            {
+              "path": "Select",
+              "name": "选择器(Select)"
+            },
+            {
+              "path": "Checkbox",
+              "name": "多选框(Checkbox)"
+            },
+            {
+              "path": "Upload",
+              "name": "上传(Upload)"
+            }
+          ]
+        },
+        {
+          "path": "RichTextEditor",
+          "name": "富文本编辑器(RichTextEditor)"
+        },
+        {
+          "path": "RefreshPage",
+          "name": "刷新页面(RefreshPage)"
+        },
+        {
+          "path": "UpdateSearchParams",
+          "name": "动态更新参数(UpdateSearchParams)"
+        },
+        {
+          "path": "Modal",
+          "name": "对话框(Modal)"
+        },
+        {
+          "path": "Loading",
+          "name": "加载中(Loading)"
+        },
+        {
+          "path": "Button",
+          "name": "按钮(Button)"
+        },
+        {
+          "path": "Icons",
+          "name": "图标(Icons)"
+        },
+        {
+          "path": "Table",
+          "name": "表格(Table)"
+        },
+        {
+          "path": "PageContainer",
+          "name": "页面容器(PageContainer)"
+        }
+      ]
+    }
+  ],
+  "message": "成功"
+}

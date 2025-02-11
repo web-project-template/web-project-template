@@ -91,6 +91,11 @@ const route = {
                             icon: <ChromeFilled/>,
                         },
                         {
+                            path: 'Checkbox',
+                            name: '多选框(Checkbox)',
+                            icon: <ChromeFilled/>,
+                        },
+                        {
                             path: 'Upload',
                             name: '上传(Upload)',
                             icon: <ChromeFilled/>,
@@ -147,9 +152,4 @@ const route = {
     ],
 }
 
-export default {
-    prefixCls: "seasun", // 定义组件的类名前缀
-    fixSiderbar: true,   // 是否固定导航
-    layout: 'mix', // layout 的菜单模式，side：右侧导航，top：顶部导航, mix 混合
-    route,
-};
+export default route;

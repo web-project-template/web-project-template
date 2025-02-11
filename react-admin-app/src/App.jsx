@@ -1,7 +1,9 @@
-import React, {Fragment, Suspense, lazy,} from 'react';
+import React, {Fragment, Suspense, lazy, useEffect, useState,} from 'react';
 import {Route, NavLink, Switch, Redirect, HashRouter} from 'react-router-dom';
 import {ConfigProvider} from 'antd';
 import "./App.scss"
+
+import {System} from "@/services";
 
 import ProLayout from './layout/ProLayout/index'
 import Login from './pages/Login/index'
@@ -13,6 +15,7 @@ import Form from './pages/AntDesign/Form/Form/index'
 import Select from '@/pages/AntDesign/Form/Select/index'
 import Input from '@/pages/AntDesign/Form/Input/index'
 import Upload from '@/pages/AntDesign/Form/Upload/index'
+import Checkbox from '@/pages/AntDesign/Form/Checkbox/index'
 
 import Loading from './pages/AntDesign/Loading/index'
 import Button from './pages/AntDesign/Button/index'
@@ -35,10 +38,35 @@ import Rule from '@/pages/SACP/System/Rule/index'
 import Menu from '@/pages/SACP/System/Menu/index'
 
 export default function App() {
+    const [state, setState] = useState({
+        userInfo: null,
+        userMenus: null,
+    })
+    useEffect(() => {
+        // 获取用户的基本信息
+        System.getUserInfo().then(result => {
+            setState(prevState => ({
+                ...prevState,
+                userInfo: result.data
+            }))
+        });
+
+        // 获取用户的权限数据
+        System.getUserMenus().then(result => {
+            setState(prevState => ({
+                ...prevState,
+                userMenus: result.data
+            }))
+        });
+    }, []);
+
+    if (!state.userInfo || !state.userMenus)
+        return null;
+
     return (
         <ConfigProvider theme={{token: {colorPrimary: '#00b96b'}}}>
             <HashRouter>
-                <ProLayout>
+                <ProLayout {...state}>
                     <Switch>
                         <Redirect from="/" to="/Dashboard" exact/>
                         <Route path='/Login' exact component={Login}/>
@@ -57,10 +85,11 @@ export default function App() {
                         <Route path='/SACP/System/Rule' exact component={Rule}/>
                         <Route path='/SACP/System/Menu' exact component={Menu}/>
 
-                        <Route path='/AntDesign/Form/Form' exact component={Form}/>
+                        <Route path='/AntDesign/Form/AntForm' exact component={Form}/>
                         <Route path='/AntDesign/Form/Select' exact component={Select}/>
                         <Route path='/AntDesign/Form/Input' exact component={Input}/>
                         <Route path='/AntDesign/Form/Upload' exact component={Upload}/>
+                        <Route path='/AntDesign/Form/Checkbox' exact component={Checkbox}/>
 
                         <Route path='/AntDesign/RichTextEditor' exact component={RichTextEditor}/>
                         <Route path='/AntDesign/UpdateSearchParams' exact component={UpdateSearchParams}/>

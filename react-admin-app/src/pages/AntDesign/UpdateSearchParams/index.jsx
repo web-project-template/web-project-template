@@ -3,9 +3,12 @@ import {useHistory} from 'react-router-dom';
 
 export default () => {
     const history = useHistory();
-    const searchParams = new URLSearchParams(history.location.search);
-    const paramsObject = Object.fromEntries(searchParams.entries());
-    console.log(paramsObject);
+    const params = new URLSearchParams(history.location.search);
+    // entries() 方法返回一个用于遍历该对象中包含的所有键/值对的迭代器。
+    const paramsIterator = params.entries()
+    // Object.fromEntries() 静态方法将键值对列表转换为一个对象。
+    const paramsObject = Object.fromEntries(paramsIterator);
+    console.log({params, paramsIterator, paramsObject});
 
     const handleUpdateParams = () => {
         // 获取当前URL的查询参数
