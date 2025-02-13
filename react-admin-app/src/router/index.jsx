@@ -14,11 +14,14 @@ const generateRoutesFromMenus = (menus) => {
         }
 
         // 如果有路径，创建路由配置
-        if (menu.path && components[menu.path]) {
+        if (menu.path) {
+            const element = components[menu.path]
+                ? React.createElement(components[menu.path])
+                : <span>未找到路径{menu.path}对应的页面组件</span>
             return {
                 path: menu.path,
-                element: React.createElement(components[menu.path])
-            };
+                element
+            }
         }
 
         return null;
