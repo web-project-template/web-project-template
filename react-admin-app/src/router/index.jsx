@@ -1,20 +1,50 @@
 import React from 'react';
 import {useRoutes, Navigate} from 'react-router-dom';
 import ProLayout from '@/layout/ProLayout/index'
-
 import components from './components'
+
+// 递归处理菜单数据，生成路由配置
+const generateRoutesFromMenus = (menus) => {
+    if (!menus) return [];
+
+    const routes = menus.map(menu => {
+        // 如果没有routes，说明是菜单组，继续处理子菜单
+        if (menu.routes) {
+            return generateRoutesFromMenus(menu.routes);
+        }
+
+        // 如果有路径，创建路由配置
+        if (menu.path && components[menu.path]) {
+            return {
+                path: menu.path,
+                element: React.createElement(components[menu.path])
+            };
+        }
+
+        return null;
+    })
+
+    return routes.filter((item) => {
+        return item;
+    }).flat(Infinity);
+};
 
 const Router = (props) => {
     const {userInfo, userMenus} = props;
 
+    // 生成动态路由配置
+    const dynamicRoutes = generateRoutesFromMenus(userMenus);
+
+    console.log({dynamicRoutes});
+
     const routes = [
         {
             path: '/Login',
-            element: components['/Login'],
+            element: React.createElement(components['/Login']),
         },
         {
             path: '/Logout',
-            element: components['/Logout'],
+            element: React.createElement(components['/Logout']),
         },
         {
             path: '/',
@@ -25,36 +55,19 @@ const Router = (props) => {
                     element: <Navigate to="/Dashboard" replace/>,
                 },
                 {
-                    path: '/Dashboard',
-                    element: components['/Dashboard'],
+                    path: 'Dashboard',
+                    element: React.createElement(components['/Dashboard']),
                 },
                 {
-                    path: '/UserCenter',
-                    element: components['/UserCenter'],
+                    path: 'UserCenter',
+                    element: React.createElement(components['/UserCenter']),
                 },
-                // {
-                //     path: '/SACP/Mark/MarkVideo',
-                //     element: components['/SACP/Mark/MarkVideo'],
-                // },
-                // {
-                //     path: '/SACP/Mark/MarkImage',
-                //     element: components['/SACP/Mark/MarkImage'],
-                // },
-                // {
-                //     path: '/SACP/Mark/MarkInference',
-                //     element: components['/SACP/Mark/MarkInference'],
-                // },
-                // {
-                //     path: '/SACP/Mark/QualityInspection',
-                //     element: components['/SACP/Mark/QualityInspection'],
-                // },
-                // {
-                //     path: '/SACP/Mark/MarkRecord',
-                //     element: components['/SACP/Mark/MarkRecord'],
-                // },
+                // 添加动态生成的路由
+                ...dynamicRoutes,
+                // 404 路由放在最后
                 {
                     path: '*',
-                    element: components['/404'],
+                    element: React.createElement(components['/404']),
                 }
             ]
         }

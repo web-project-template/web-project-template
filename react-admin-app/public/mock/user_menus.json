@@ -3,39 +3,41 @@
   "data": [
     {
       "id": 100,
+      "key": "AGI",
       "name": "AGI",
-      "icon": "heart",
-      "path": "AGI"
+      "path": "/AGI",
+      "icon": "heart"
     },
     {
       "id": 200,
+      "key": "SACP",
       "name": "SACP",
+      "path": "/SACP",
       "icon": "FireOutlined",
-      "path": "SACP",
       "routes": [
         {
           "name": "违规业务",
-          "path": "Illegal"
+          "path": "/SACP/Illegal"
         },
         {
           "name": "标注管理",
-          "path": "Mark",
+          "path": "/SACP/Mark",
           "routes": [
             {
               "name": "视频列表",
-              "path": "MarkVideo"
+              "path": "/SACP/Mark/MarkVideo"
             },
             {
               "name": "图片列表",
-              "path": "MarkImage"
+              "path": "/SACP/Mark/MarkImage"
             },
             {
               "name": "推理信息",
-              "path": "MarkInference"
+              "path": "/SACP/Mark/MarkInference"
             },
             {
               "name": "标注质检",
-              "path": "QualityInspection"
+              "path": "/SACP/Mark/QualityInspection"
             }
           ]
         },
@@ -45,15 +47,15 @@
           "routes": [
             {
               "name": "用户管理",
-              "path": "User"
+              "path": "/SACP/System/User"
             },
             {
               "name": "角色管理",
-              "path": "Rule"
+              "path": "/SACP/System/Rule"
             },
             {
               "name": "菜单管理",
-              "path": "Menu"
+              "path": "/SACP/System/Menu"
             }
           ]
         }
@@ -61,71 +63,72 @@
     },
     {
       "id": 300,
+      "key": "AntDesign",
       "name": "AntDesign",
+      "path": "/AntDesign",
       "icon": "SmileOutlined",
-      "path": "AntDesign",
       "routes": [
         {
           "name": "数据录入",
-          "path": "Form",
+          "path": "/AntDesign/Form",
           "routes": [
             {
               "name": "表单(Form)",
-              "path": "AntForm"
+              "path": "/AntDesign/Form/Form"
             },
             {
-              "path": "Input",
-              "name": "输入框(Input)"
+              "name": "输入框(Input)",
+              "path": "/AntDesign/Form/Input"
             },
             {
-              "path": "Select",
-              "name": "选择器(Select)"
+              "name": "选择器(Select)",
+              "path": "/AntDesign/Form/Select"
             },
             {
-              "path": "Checkbox",
-              "name": "多选框(Checkbox)"
+              "name": "多选框(Checkbox)",
+              "path": "/AntDesign/Form/Checkbox"
             },
             {
-              "path": "Upload",
-              "name": "上传(Upload)"
+              "name": "上传(Upload)",
+              "path": "/AntDesign/Form/Upload"
             }
           ]
         },
         {
-          "path": "RichTextEditor",
-          "name": "富文本编辑器(RichTextEditor)"
+          "name": "富文本编辑器(RichTextEditor)",
+          "path": "/AntDesign/RichTextEditor"
         },
         {
-          "path": "RefreshPage",
-          "name": "刷新页面(RefreshPage)"
+          "name": "刷新页面(RefreshPage)",
+          "path": "/AntDesign/RefreshPage"
         },
         {
-          "path": "UpdateSearchParams",
-          "name": "动态更新参数(UpdateSearchParams)"
+          "name": "动态更新参数(UpdateSearchParams)",
+          "path": "/AntDesign/UpdateSearchParams"
         },
         {
-          "path": "Modal",
-          "name": "对话框(Modal)"
+          "name": "对话框(Modal)",
+          "path": "/AntDesign/Modal"
         },
         {
-          "path": "Loading",
-          "name": "加载中(Loading)"
+          "name": "加载中(Loading)",
+          "path": "/AntDesign/Loading"
         },
         {
-          "path": "Button",
-          "name": "按钮(Button)"
+          "name": "按钮(Button)",
+          "path": "/AntDesign/Button"
         },
         {
-          "path": "Icons",
-          "name": "图标(Icons)"
+          "name": "图标(Icons)",
+          "path": "/AntDesign/Icons"
         },
         {
-          "path": "Table",
-          "name": "表格(Table)"
+          "name": "表格(Table)",
+          "path": "/AntDesign/Table"
         },
         {
-          "path": "PageContainer",
-          "name": "页面容器(PageContainer)"
+          "name": "页面容器(PageContainer)",
+          "path": "/AntDesign/PageContainer"
         }
       ]
     }

@@ -1,16 +1,10 @@
-import React, {Suspense, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter,} from 'react-router-dom';
-import {ConfigProvider, Spin} from 'antd';
+import {ConfigProvider} from 'antd';
 import "./App.scss"
 
 import Router from '@/router'
 import {System} from "@/services";
-
-const LoadingComponent = () => (
-    <div style={{padding: '50px', textAlign: 'center'}}>
-        <Spin size="large"/>
-    </div>
-);
 
 // 主应用组件
 export default function App() {
@@ -42,12 +36,10 @@ export default function App() {
     }
 
     return (
-        <Suspense fallback={<LoadingComponent/>}>
-            <ConfigProvider theme={{token: {colorPrimary: '#00b96b'}}}>
-                <BrowserRouter>
-                    <Router {...state}></Router>
-                </BrowserRouter>
-            </ConfigProvider>
-        </Suspense>
+        <ConfigProvider theme={{token: {colorPrimary: '#00b96b'}}}>
+            <BrowserRouter>
+                <Router {...state}></Router>
+            </BrowserRouter>
+        </ConfigProvider>
     );
 }

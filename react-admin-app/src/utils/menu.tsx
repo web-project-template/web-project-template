@@ -22,13 +22,13 @@ export const getIcon = (icon) => {
 };
 
 export const loopMenuItem = (menus: any[]): any[] => {
-    return menus.map(({icon, routes, ...item}) => {
-        return {
-            ...item,
-            key: item.path,
-            icon: getIcon(icon),
-            routes: routes && loopMenuItem(routes)
-        };
-    });
-}
+    if (!menus) return [];
 
+    return menus.map(({icon, routes, ...item}) => ({
+        // 确保关键属性存在
+        name: item.name,
+        path: item.path,
+        icon: getIcon(icon),
+        routes: routes && loopMenuItem(routes),
+    }));
+}

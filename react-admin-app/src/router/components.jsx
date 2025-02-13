@@ -1,61 +1,48 @@
-import {lazy,} from 'react';
+import React, {lazy, Suspense} from 'react';
+import {Spin} from 'antd';
 
-const Login = lazy(() => import('@/pages/Login/index'));
-const Logout = lazy(() => import('@/pages/Logout/index'));
-const Dashboard = lazy(() => import('@/pages/Dashboard/index'));
-const UserCenter = lazy(() => import('@/pages/UserCenter/index'));
-const NotFound = lazy(() => import('@/pages/404/index'));
+const LoadingComponent = () => (
+    <div style={{padding: '50px', textAlign: 'center'}}>
+        <Spin size="large"/>
+    </div>
+);
 
-const MarkVideo = lazy(() => import('@/pages/SACP/Mark/MarkVideo/index'));
-const MarkImage = lazy(() => import('@/pages/SACP/Mark/MarkImage/index'));
-const MarkInference = lazy(() => import('@/pages/SACP/Mark/MarkInference/index'));
-const QualityInspection = lazy(() => import('@/pages/SACP/Mark/QualityInspection/index'));
-const MarkRecord = lazy(() => import('@/pages/SACP/Mark/MarkRecord/index'));
-const User = lazy(() => import('@/pages/SACP/System/User/index'));
-const Rule = lazy(() => import('@/pages/SACP/System/Rule/index'));
-const Menu = lazy(() => import('@/pages/SACP/System/Menu/index'));
+// 包装成 React 组件
+const wrapComponent = (LazyComponent) => {
+    return () => (
+        <Suspense fallback={<LoadingComponent/>}>
+            <LazyComponent/>
+        </Suspense>
+    );
+};
 
-const Form = lazy(() => import('@/pages/AntDesign/Form/Form/index'));
-const Select = lazy(() => import('@/pages/AntDesign/Form/Select/index'));
-const Input = lazy(() => import('@/pages/AntDesign/Form/Input/index'));
-const Upload = lazy(() => import('@/pages/AntDesign/Form/Upload/index'));
-const Loading = lazy(() => import('@/pages/AntDesign/Loading/index'));
-const Button = lazy(() => import('@/pages/AntDesign/Button/index'));
-const Icons = lazy(() => import('@/pages/AntDesign/Icons/index'));
-const Table = lazy(() => import('@/pages/AntDesign/Table/index'));
-const PageContainer = lazy(() => import('@/pages/AntDesign/PageContainer/index'));
-const Modal = lazy(() => import('@/pages/AntDesign/Modal/index'));
-const RefreshPage = lazy(() => import('@/pages/AntDesign/RefreshPage/index'));
-const UpdateSearchParams = lazy(() => import('@/pages/AntDesign/UpdateSearchParams/index'));
-const RichTextEditor = lazy(() => import('@/pages/AntDesign/RichTextEditor/index'));
-
-export default {
-    '/Login': <Login/>,
-    '/Logout': <Logout/>,
-    '/Dashboard': <Dashboard/>,
-    '/UserCenter': <UserCenter/>,
-    '/404': <NotFound/>,
-
-    '/SACP/Mark/MarkVideo': <MarkVideo/>,
-    '/SACP/Mark/MarkImage': <MarkImage/>,
-    '/SACP/Mark/MarkInference': <MarkInference/>,
-    '/SACP/Mark/QualityInspection': <QualityInspection/>,
-    '/SACP/Mark/MarkRecord': <MarkRecord/>,
-    '/SACP/System/User': <User/>,
-    '/SACP/System/Rule': <Rule/>,
-    '/SACP/System/Menu': <Menu/>,
-
-    '/AntDesign/Form/Form': <Form/>,
-    '/AntDesign/Form/Select': <Select/>,
-    '/AntDesign/Form/Input': <Input/>,
-    '/AntDesign/Form/Upload': <Upload/>,
-    '/AntDesign/Loading': <Loading/>,
-    '/AntDesign/Button': <Button/>,
-    '/AntDesign/Icons': <Icons/>,
-    '/AntDesign/Table': <Table/>,
-    '/AntDesign/PageContainer': <PageContainer/>,
-    '/AntDesign/Modal': <Modal/>,
-    '/AntDesign/RefreshPage': <RefreshPage/>,
-    '/AntDesign/UpdateSearchParams': <UpdateSearchParams/>,
-    '/AntDesign/RichTextEditor': <RichTextEditor/>,
+// 懒加载组件
+const components = {
+    '/Login': wrapComponent(lazy(() => import('@/pages/Login/index'))),
+    '/Logout': wrapComponent(lazy(() => import('@/pages/Logout/index'))),
+    '/Dashboard': wrapComponent(lazy(() => import('@/pages/Dashboard/index'))),
+    '/UserCenter': wrapComponent(lazy(() => import('@/pages/UserCenter/index'))),
+    '/404': wrapComponent(lazy(() => import('@/pages/404/index'))),
+    '/SACP/Mark/MarkVideo': wrapComponent(lazy(() => import('@/pages/SACP/Mark/MarkVideo/index'))),
+    '/SACP/Mark/MarkImage': wrapComponent(lazy(() => import('@/pages/SACP/Mark/MarkImage/index'))),
+    '/SACP/Mark/MarkInference': wrapComponent(lazy(() => import('@/pages/SACP/Mark/MarkInference/index'))),
+    '/SACP/Mark/QualityInspection': wrapComponent(lazy(() => import('@/pages/SACP/Mark/QualityInspection/index'))),
+    '/SACP/Mark/MarkRecord': wrapComponent(lazy(() => import('@/pages/SACP/Mark/MarkRecord/index'))),
+    '/SACP/System/User': wrapComponent(lazy(() => import('@/pages/SACP/System/User/index'))),
+    '/SACP/System/Rule': wrapComponent(lazy(() => import('@/pages/SACP/System/Rule/index'))),
+    '/SACP/System/Menu': wrapComponent(lazy(() => import('@/pages/SACP/System/Menu/index'))),
+    '/AntDesign/Form/Form': wrapComponent(lazy(() => import('@/pages/AntDesign/Form/Form/index'))),
+    '/AntDesign/Form/Select': wrapComponent(lazy(() => import('@/pages/AntDesign/Form/Select/index'))),
+    '/AntDesign/Form/Input': wrapComponent(lazy(() => import('@/pages/AntDesign/Form/Input/index'))),
+    '/AntDesign/Form/Upload': wrapComponent(lazy(() => import('@/pages/AntDesign/Form/Upload/index'))),
+    '/AntDesign/Loading': wrapComponent(lazy(() => import('@/pages/AntDesign/Loading/index'))),
+    '/AntDesign/Button': wrapComponent(lazy(() => import('@/pages/AntDesign/Button/index'))),
+    '/AntDesign/Icons': wrapComponent(lazy(() => import('@/pages/AntDesign/Icons/index'))),
+    '/AntDesign/Table': wrapComponent(lazy(() => import('@/pages/AntDesign/Table/index'))),
+    '/AntDesign/PageContainer': wrapComponent(lazy(() => import('@/pages/AntDesign/PageContainer/index'))),
+    '/AntDesign/Modal': wrapComponent(lazy(() => import('@/pages/AntDesign/Modal/index'))),
+    '/AntDesign/RefreshPage': wrapComponent(lazy(() => import('@/pages/AntDesign/RefreshPage/index'))),
+    '/AntDesign/UpdateSearchParams': wrapComponent(lazy(() => import('@/pages/AntDesign/UpdateSearchParams/index'))),
+    '/AntDesign/RichTextEditor': wrapComponent(lazy(() => import('@/pages/AntDesign/RichTextEditor/index'))),
 }
+export default components
