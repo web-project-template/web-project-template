@@ -33,6 +33,7 @@ const components = {
     '/SACP/System/Menu': wrapComponent(lazy(() => import('@/pages/SACP/System/Menu/index'))),
     '/AntDesign/Form/Form': wrapComponent(lazy(() => import('@/pages/AntDesign/Form/Form/index'))),
     '/AntDesign/Form/Select': wrapComponent(lazy(() => import('@/pages/AntDesign/Form/Select/index'))),
+    '/AntDesign/Form/Checkbox': wrapComponent(lazy(() => import('@/pages/AntDesign/Form/Checkbox/index'))),
     '/AntDesign/Form/Input': wrapComponent(lazy(() => import('@/pages/AntDesign/Form/Input/index'))),
     '/AntDesign/Form/Upload': wrapComponent(lazy(() => import('@/pages/AntDesign/Form/Upload/index'))),
     '/AntDesign/Loading': wrapComponent(lazy(() => import('@/pages/AntDesign/Loading/index'))),

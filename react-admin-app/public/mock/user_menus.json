@@ -17,7 +17,21 @@
       "routes": [
         {
           "name": "违规业务",
-          "path": "/SACP/Illegal"
+          "path": "/SACP/violation",
+          "routes": [
+            {
+              "name": "违规处理",
+              "path": "/SACP/violation/deal"
+            },
+            {
+              "name": "违规申诉",
+              "path": "/SACP/violation/appeal"
+            },
+            {
+              "name": "工单搜索",
+              "path": "/SACP/violation/search"
+            }
+          ]
         },
         {
           "name": "标注管理",
@@ -38,6 +52,11 @@
             {
               "name": "标注质检",
               "path": "/SACP/Mark/QualityInspection"
+            },
+            {
+              "name": "标注记录",
+              "path": "/SACP/Mark/MarkRecord",
+              "hideInMenu": true
             }
           ]
         },

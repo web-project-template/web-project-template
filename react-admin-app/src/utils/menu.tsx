@@ -30,5 +30,6 @@ export const loopMenuItem = (menus: any[]): any[] => {
         path: item.path,
         icon: getIcon(icon),
         routes: routes && loopMenuItem(routes),
-    }));
+        hideInMenu: item.hideInMenu
+    })).filter(item => !item.hideInMenu);
 }
