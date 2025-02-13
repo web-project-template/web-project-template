@@ -1,4 +1,4 @@
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {ProTable} from '@ant-design/pro-components'
 
 import {ActionType, createActionFun} from '@/utils/action'
@@ -8,10 +8,10 @@ import {PRO_TABLE_DEFAULT_PROPS} from '@/constants'
 import {getColumns, getColumnsWidth} from './table'
 
 export default () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const onAction = createActionFun({
         [ActionType.CHECK](data: any) {
-            history.push(`/SACP/Mark/MarkRecord?id=${data.id}`)
+            navigate(`/SACP/Mark/MarkRecord?id=${data.id}`)
         }
     })
     const columns = getColumns({onAction})

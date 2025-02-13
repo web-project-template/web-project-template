@@ -1,8 +1,8 @@
 import {Button} from 'antd';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 export default () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const params = new URLSearchParams(history.location.search);
     // entries() 方法返回一个用于遍历该对象中包含的所有键/值对的迭代器。
     const paramsIterator = params.entries()
@@ -18,7 +18,7 @@ export default () => {
         // 构建新的查询字符串
         const newSearch = queryParams.toString();
         // 使用history.push更新URL
-        history.push({pathname: history.location.pathname, search: newSearch});
+        navigate({pathname: history.location.pathname, search: newSearch});
     };
 
     return (

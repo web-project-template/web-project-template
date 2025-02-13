@@ -1,54 +1,31 @@
-import React, {Fragment, Suspense, lazy, useEffect, useState,} from 'react';
-import {Route, NavLink, Switch, Redirect, HashRouter} from 'react-router-dom';
-import {ConfigProvider} from 'antd';
+import React, {Suspense, useEffect, useState} from 'react';
+import {BrowserRouter,} from 'react-router-dom';
+import {ConfigProvider, Spin} from 'antd';
 import "./App.scss"
 
+import Router from '@/router'
 import {System} from "@/services";
 
-import ProLayout from './layout/ProLayout/index'
-import Login from './pages/Login/index'
-import Logout from './pages/Logout/index'
-import Dashboard from './pages/Dashboard/index'
-import UserCenter from './pages/UserCenter/index'
+const LoadingComponent = () => (
+    <div style={{padding: '50px', textAlign: 'center'}}>
+        <Spin size="large"/>
+    </div>
+);
 
-import Form from './pages/AntDesign/Form/Form/index'
-import Select from '@/pages/AntDesign/Form/Select/index'
-import Input from '@/pages/AntDesign/Form/Input/index'
-import Upload from '@/pages/AntDesign/Form/Upload/index'
-import Checkbox from '@/pages/AntDesign/Form/Checkbox/index'
-
-import Loading from './pages/AntDesign/Loading/index'
-import Button from './pages/AntDesign/Button/index'
-import Icons from './pages/AntDesign/Icons/index'
-import Table from './pages/AntDesign/Table/index'
-import PageContainer from './pages/AntDesign/PageContainer/index'
-import Modal from './pages/AntDesign/Modal/index'
-import RefreshPage from './pages/AntDesign/RefreshPage/index'
-import UpdateSearchParams from './pages/AntDesign/UpdateSearchParams/index'
-import RichTextEditor from './pages/AntDesign/RichTextEditor/index'
-
-import MarkVideo from './pages/SACP/Mark/MarkVideo/index'
-import MarkImage from './pages/SACP/Mark/MarkImage/index'
-import MarkInference from './pages/SACP/Mark/MarkInference/index'
-import QualityInspection from './pages/SACP/Mark/QualityInspection/index'
-import MarkRecord from './pages/SACP/Mark/MarkRecord/index'
-
-import User from '@/pages/SACP/System/User/index'
-import Rule from '@/pages/SACP/System/Rule/index'
-import Menu from '@/pages/SACP/System/Menu/index'
-
+// 主应用组件
 export default function App() {
     const [state, setState] = useState({
         userInfo: null,
         userMenus: null,
-    })
+    });
+
     useEffect(() => {
         // 获取用户的基本信息
         System.getUserInfo().then(result => {
             setState(prevState => ({
                 ...prevState,
                 userInfo: result.data
-            }))
+            }));
         });
 
         // 获取用户的权限数据
@@ -56,53 +33,21 @@ export default function App() {
             setState(prevState => ({
                 ...prevState,
                 userMenus: result.data
-            }))
+            }));
         });
     }, []);
 
-    if (!state.userInfo || !state.userMenus)
-        return null;
+    if (!state.userInfo || !state.userMenus) {
+        return ''
+    }
 
     return (
-        <ConfigProvider theme={{token: {colorPrimary: '#00b96b'}}}>
-            <HashRouter>
-                <ProLayout {...state}>
-                    <Switch>
-                        <Redirect from="/" to="/Dashboard" exact/>
-                        <Route path='/Login' exact component={Login}/>
-                        <Route path='/Logout' exact component={Logout}/>
-
-                        <Route path='/Dashboard' exact component={Dashboard}/>
-                        <Route path='/UserCenter' exact component={UserCenter}/>
-
-                        <Route path='/SACP/Mark/MarkImage' exact component={MarkImage}/>
-                        <Route path='/SACP/Mark/MarkVideo' exact component={MarkVideo}/>
-                        <Route path='/SACP/Mark/MarkInference' exact component={MarkInference}/>
-                        <Route path='/SACP/Mark/QualityInspection' exact component={QualityInspection}/>
-                        <Route path='/SACP/Mark/MarkRecord' exact component={MarkRecord}/>
-
-                        <Route path='/SACP/System/User' exact component={User}/>
-                        <Route path='/SACP/System/Rule' exact component={Rule}/>
-                        <Route path='/SACP/System/Menu' exact component={Menu}/>
-
-                        <Route path='/AntDesign/Form/AntForm' exact component={Form}/>
-                        <Route path='/AntDesign/Form/Select' exact component={Select}/>
-                        <Route path='/AntDesign/Form/Input' exact component={Input}/>
-                        <Route path='/AntDesign/Form/Upload' exact component={Upload}/>
-                        <Route path='/AntDesign/Form/Checkbox' exact component={Checkbox}/>
-
-                        <Route path='/AntDesign/RichTextEditor' exact component={RichTextEditor}/>
-                        <Route path='/AntDesign/UpdateSearchParams' exact component={UpdateSearchParams}/>
-                        <Route path='/AntDesign/RefreshPage' exact component={RefreshPage}/>
-                        <Route path='/AntDesign/Modal' exact component={Modal}/>
-                        <Route path='/AntDesign/Loading' exact component={Loading}/>
-                        <Route path='/AntDesign/Button' exact component={Button}/>
-                        <Route path='/AntDesign/Icons' exact component={Icons}/>
-                        <Route path='/AntDesign/Table' exact component={Table}/>
-                        <Route path='/AntDesign/PageContainer' exact component={PageContainer}/>
-                    </Switch>
-                </ProLayout>
-            </HashRouter>
-        </ConfigProvider>
+        <Suspense fallback={<LoadingComponent/>}>
+            <ConfigProvider theme={{token: {colorPrimary: '#00b96b'}}}>
+                <BrowserRouter>
+                    <Router {...state}></Router>
+                </BrowserRouter>
+            </ConfigProvider>
+        </Suspense>
     );
 }

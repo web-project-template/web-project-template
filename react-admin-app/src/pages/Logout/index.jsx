@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 export default () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [countdown, setCountdown] = useState(3);
     let myCount = 3;
 
@@ -11,7 +11,7 @@ export default () => {
             setCountdown(--myCount);
             if (myCount <= 0) {
                 window.clearInterval(id)
-                history.push(`/Login`);
+                navigate(`/Login`);
             }
         }, 1000)
     }, [])

@@ -29,7 +29,7 @@ import {
 } from '@ant-design/pro-components';
 
 import React, {useState, useEffect} from 'react';
-import {useHistory, useLocation} from 'react-router-dom';
+import {Outlet, useNavigate} from 'react-router-dom';
 import route from './route';
 import Breadcrumb from '../Breadcrumb'
 import {loopMenuItem} from "@/utils/menu";
@@ -37,12 +37,11 @@ import {loopMenuItem} from "@/utils/menu";
 let count = 1;
 
 export default (props) => {
-    const {children, userInfo, userMenus} = props
+    const {userInfo, userMenus} = props
     const [pathname, setPathname] = useState('/');
-    const history = useHistory();
-    const location = useLocation();
+    const navigate = useNavigate();
 
-    var menu_fold = JSON.parse(localStorage.getItem("menu_fold")) || false;
+    const menu_fold = JSON.parse(localStorage.getItem("menu_fold")) || false;
     const [collapsed, setCollapsed] = useState(menu_fold);
     const [openKeys, setOpenKeys] = useState(['AGI', 'SACP', 'AntDesign']);
 
@@ -72,20 +71,13 @@ export default (props) => {
     ]
 
     const onClick = ({key}) => {
-        history.push(`/${key}`);
+        navigate(`${key}`);
     };
 
-    // console.log(location)
-    const fullScreenPath = [
-        '/Login',
-        '/Logout'
-    ]
-    if (fullScreenPath.includes(location.pathname)) {
+    if (!userInfo || !userMenus) {
         return (
-            <>
-                {children}
-            </>
-        )
+            <Outlet/>
+        );
     }
 
     return (
@@ -160,9 +152,8 @@ export default (props) => {
             menuItemRender={(item, dom) => (
                 <div
                     onClick={() => {
-                        // console.log('click menu item', item)
                         setPathname(item.path);
-                        history.push(item.path);
+                        navigate(item.path);
                     }}
                 >
                     {dom}
@@ -171,7 +162,7 @@ export default (props) => {
             collapsedButtonRender={() => null}
         >
             <div className="main-container">
-                {children}
+                <Outlet/>
             </div>
         </ProLayout>
     );
