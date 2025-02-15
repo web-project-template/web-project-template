@@ -6,7 +6,6 @@ import "./App.scss"
 import Router from '@/router'
 import {System} from "@/services";
 
-// 主应用组件
 export default function App() {
     const [state, setState] = useState({
         userInfo: null,
