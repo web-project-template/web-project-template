@@ -1,8 +1,7 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 
 import Layout from '../layout/index.vue'
-import Test from '../pages/test/index.vue'
-import About from '../pages/about/index.vue'
+import components from "./components";
 
 const routes = [
   {
@@ -12,16 +11,16 @@ const routes = [
     children: [
       {
         path: '/index',
-        component: () => import('../pages/index.vue'),
+        component: components['/index'],
       },
       {
         path: '/system/user',
-        component: () => import('../pages/system/user/index.vue'),
+        component: components['/system/user'],
       }
     ]
   },
-  {path: '/test', component: Test},
-  {path: '/about', component: About},
+  {path: '/login', component: components['/login']},
+  {path: '/signin', component: components['/signin']},
 ]
 
 const router = createRouter({
