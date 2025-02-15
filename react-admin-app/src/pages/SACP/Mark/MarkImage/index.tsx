@@ -4,11 +4,12 @@ import {ProTable} from '@ant-design/pro-components'
 
 import {ActionType, createActionFun} from '@/utils/action'
 import usePopup from '@/hooks/usePopup'
-import {Message} from '@/services'
 import {PRO_TABLE_DEFAULT_PROPS} from '@/constants'
+import {Mark} from "@/services";
 
 import {getColumns, getColumnsWidth} from './table'
 import CreateModal from './Create'
+import './index.scss'
 
 const {Text} = Typography
 
@@ -30,7 +31,7 @@ export default () => {
     const columns = getColumns({onAction})
     const scrollX = getColumnsWidth(columns)
     const request = async (params: any) => {
-        const result = await Message.templateList(params)
+        const result = await Mark.getImageList(params)
         const {success, data, total_num: total} = result
 
         setTotal(total)
@@ -42,11 +43,11 @@ export default () => {
     }
 
     return (
-        <>
+        <div className='mark-image-page'>
             <ProTable
                 {...PRO_TABLE_DEFAULT_PROPS}
                 actionRef={actionRef}
-                scroll={{x: scrollX}}
+                scroll={{x: scrollX, y: '100%'}}
                 columns={columns}
                 request={request}
                 toolBarRender={() => [
@@ -55,6 +56,7 @@ export default () => {
                     </Button>,
                 ]}
                 headerTitle={<Text>图片 共{total}张</Text>}
+                tableClassName={'image-table'}
             ></ProTable>
 
             <CreateModal
@@ -64,6 +66,6 @@ export default () => {
                 data={currentRow}
                 actionRef={actionRef}
             />
-        </>
+        </div>
     )
 }
