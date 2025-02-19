@@ -114,18 +114,6 @@
           ]
         },
         {
-          "name": "富文本编辑器(RichTextEditor)",
-          "path": "/AntDesign/RichTextEditor"
-        },
-        {
-          "name": "刷新页面(RefreshPage)",
-          "path": "/AntDesign/RefreshPage"
-        },
-        {
-          "name": "动态更新参数(UpdateSearchParams)",
-          "path": "/AntDesign/UpdateSearchParams"
-        },
-        {
           "name": "对话框(Modal)",
           "path": "/AntDesign/Modal"
         },
@@ -146,8 +134,16 @@
           "path": "/AntDesign/Table"
         },
         {
+          "name": "标签页(Tabs)",
+          "path": "/AntDesign/Tabs"
+        },
+        {
           "name": "页面容器(PageContainer)",
           "path": "/AntDesign/PageContainer"
+        },
+        {
+          "name": "富文本编辑器(RichTextEditor)",
+          "path": "/AntDesign/RichTextEditor"
         }
       ]
     },
@@ -156,11 +152,32 @@
       "key": "Demo",
       "name": "Demo",
       "path": "/Demo",
-      "icon": "heart",
+      "icon": "StarOutlined",
       "routes": [
         {
           "name": "音频可视化",
           "path": "/Demo/AudioVisualization"
+        },
+        {
+          "name": "表单创建",
+          "path": "/Demo/FormCreate"
+        }
+      ]
+    },
+    {
+      "id": 500,
+      "key": "Test",
+      "name": "Test",
+      "path": "/Test",
+      "icon": "TransactionOutlined",
+      "routes": [
+        {
+          "name": "刷新页面",
+          "path": "/Test/RefreshPage"
+        },
+        {
+          "name": "动态更新参数",
+          "path": "/Test/UpdateSearchParams"
         }
       ]
     }

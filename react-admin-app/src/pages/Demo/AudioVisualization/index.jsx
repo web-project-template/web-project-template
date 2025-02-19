@@ -22,14 +22,11 @@ export default () => {
             template,
             data: {
                 music_list: [
-                    {name: '九月', url: '李志 - 九月.mp3'},
-                    {name: '再见青春', url: '任素汐 - 再见青春.mp3'},
-                    {name: '缠', url: '朱格乐 - 缠.mp3'},
-                    {name: '采样练习3', url: 'allenvee - 采样练习3.mp3'},
-                    {name: 'Coral Sea (Chillout Mix)', url: 'Black Pearl - Coral Sea (Chillout Mix).mp3'},
-                    {name: 'btn', url: 'btn.mp3'},
-                    {name: 'trump_day1_bg', url: 'trump_day1_bg.mp3'},
-                    {name: 'trump_day2_bg', url: 'trump_day2_bg.mp3'},
+                    {name: '采样练习3(无音乐)', url: 'allenvee - 采样练习3.mp3'},
+                    {name: 'Coral Sea (Chillout Mix)(无音乐)', url: 'Black Pearl - Coral Sea (Chillout Mix).mp3'},
+                    {name: '点击音乐', url: 'btn.mp3'},
+                    {name: '背景音乐1', url: 'trump_day1_bg.mp3'},
+                    {name: '背景音乐2', url: 'trump_day2_bg.mp3'},
                 ]
             },
             mounted() {
