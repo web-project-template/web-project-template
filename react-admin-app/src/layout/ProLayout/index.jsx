@@ -8,6 +8,7 @@ import Breadcrumb from '../Breadcrumb'
 import {loopMenuItem} from "@/utils/menu";
 
 let count = 1;
+const defaultOpenKeys = ['/AGI', '/SACP', '/AntDesign', '/Demo']
 
 export default (props) => {
     const {userInfo, userMenus} = props
@@ -16,7 +17,7 @@ export default (props) => {
 
     const menu_fold = JSON.parse(localStorage.getItem("menu_fold")) || false;
     const [collapsed, setCollapsed] = useState(menu_fold);
-    const [openKeys, setOpenKeys] = useState(['/AGI', '/SACP', '/AntDesign']);
+    const [openKeys, setOpenKeys] = useState(defaultOpenKeys);
 
     useEffect(() => {
         var onChangeMenuFoldState = (event) => {
@@ -73,7 +74,7 @@ export default (props) => {
             onOpenChange={(val) => {
                 // 这里应该是 ProLayout 的 Bug
                 if (count++ === 1 && val.length === 0) {
-                    val = ['/AGI', '/SACP', '/AntDesign']
+                    val = defaultOpenKeys
                 }
 
                 setOpenKeys(val)

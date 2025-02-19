@@ -17,7 +17,8 @@ const generateRoutesFromMenus = (menus) => {
         if (menu.path) {
             const element = components[menu.path]
                 ? React.createElement(components[menu.path])
-                : <span>未找到路径{menu.path}对应的页面组件</span>
+                :
+                <span>未找到路径{menu.path}对应的页面组件，请检查router/components.jsx模块是否配置了对应的组件。</span>
             return {
                 path: menu.path,
                 element

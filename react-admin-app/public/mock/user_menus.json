@@ -150,6 +150,19 @@
           "path": "/AntDesign/PageContainer"
         }
       ]
+    },
+    {
+      "id": 400,
+      "key": "Demo",
+      "name": "Demo",
+      "path": "/Demo",
+      "icon": "heart",
+      "routes": [
+        {
+          "name": "音频可视化",
+          "path": "/Demo/AudioVisualization"
+        }
+      ]
     }
   ],
   "message": "成功"

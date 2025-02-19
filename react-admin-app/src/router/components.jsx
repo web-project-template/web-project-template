@@ -45,5 +45,6 @@ const components = {
     '/AntDesign/RefreshPage': wrapComponent(lazy(() => import('@/pages/AntDesign/RefreshPage/index'))),
     '/AntDesign/UpdateSearchParams': wrapComponent(lazy(() => import('@/pages/AntDesign/UpdateSearchParams/index'))),
     '/AntDesign/RichTextEditor': wrapComponent(lazy(() => import('@/pages/AntDesign/RichTextEditor/index'))),
+    '/Demo/AudioVisualization': wrapComponent(lazy(() => import('@/pages/Demo/AudioVisualization/index'))),
 }
 export default components
